@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use App\Handlers\ImageUploadHandler;//自定义图片上传处理类
 class UserController extends Controller
 {
 	/**
@@ -37,9 +38,16 @@ class UserController extends Controller
      * @param    [type]     $user [description]
      * @return   [type]           [description]
      */
-    public function update(UserRequest $request , User $user)
+    public function update(UserRequest $request , ImageUploadHandler $uploader, User $user)
     {
-    	$user->update($request->all());
+    	$data = $request->all();
+    	if ($request->avatar) {//上传头像
+    		$result = $uploader->save($request->avatar, 'avatars', $user->id);
+    		if ($result) {
+    			$data['avatar'] = $result['path'];
+    		}
+    	}
+    	$user->update($data);
     	return redirect()->route('users.show' , $user->id)->with('success' , '个资料更新成功');
     }
 }
