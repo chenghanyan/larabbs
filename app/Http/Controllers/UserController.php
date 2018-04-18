@@ -8,6 +8,10 @@ use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;//自定义图片上传处理类
 class UserController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth', ['except' => ['show']]);
+	}
 	/**
 	 * 个人中心
 	 * @Author   chy
@@ -29,6 +33,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+    	$this->authorize('update',$user);
     	return view('users.edit', compact('user'));
     }
     /**
@@ -40,6 +45,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request , ImageUploadHandler $uploader, User $user)
     {
+    	$this->authorize('update', $user);//授权
     	$data = $request->all();
     	if ($request->avatar) {//上传头像
     		$result = $uploader->save($request->avatar, 'avatars', $user->id, 362);
