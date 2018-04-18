@@ -19,7 +19,7 @@
 						</a>
 					</div>
 					<div class="media-body meta">
-						<a title="{{$topic->category->name}}" href="#">
+						<a title="{{$topic->category->name}}" href="{{ route('categories.show', $topic->category->id) }}">
 							<span class="glyphicon glyphicon-folder-open" aria-hidden="true">
 							</span>
 								{{$topic->category->name}}
