@@ -5,8 +5,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Observers\UserObserver;
 use App\Observers\TopicObserver;
+use App\Observers\ReplyObserver;
 use App\Models\User;
 use App\Models\Topic;
+use App\Models\Reply;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         //为User模型注册观察者
         User::observe(UserObserver::class);
         Topic::observe(TopicObserver::class);
+        Reply::observe(ReplyObserver::class);
     }
 
     /**
