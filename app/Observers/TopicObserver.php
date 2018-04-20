@@ -26,12 +26,24 @@ class TopicObserver
         //生成话题摘录
         $topic->excerpt = make_excerpt($topic->body);
 
-          // 如 slug 字段无内容，即使用翻译器对 title 进行翻译
-    	 if(!$topic->slug) {
-            //推送到任务队列
+      //     // 如 slug 字段无内容，即使用翻译器对 title 进行翻译
+    	 // if(!$topic->slug) {
+      //       //推送到任务队列去翻译
+      //       dispatch(new TranslateSlug($topic));
+      //       //翻译
+      //       // $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
+      //    }
+    }
+    /*
+    发生在saved()方法后即数据入库以后确保了分发任务，这样就确定了$topic->id有值
+     */
+    public function saved(Topic $topic)
+    {
+        //如slug字段无内容，即使用翻译器对title进行翻译
+
+        if(!$topic->slug) {
+            //推送任务到队列
             dispatch(new TranslateSlug($topic));
-            //翻译
-            // $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
-         }
+        }
     }
 }
