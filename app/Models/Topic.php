@@ -52,4 +52,12 @@ class Topic extends Model
     {
         return route('topics.show', array_merge([$this->id, $this->slug], $params));
     }
+    /*
+    帖子回复
+    *一个帖子有很多回复
+     */
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }
