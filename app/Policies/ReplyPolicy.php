@@ -10,6 +10,7 @@ class ReplyPolicy extends Policy
     public function update(User $user, Reply $reply)
     {
         // return $reply->user_id == $user->id;
+        return $user->isAuthorOf($reply) || $user->ifAuthorOf($reply->topic);
         return true;
     }
 
