@@ -11,11 +11,10 @@ class ReplyPolicy extends Policy
     {
         // return $reply->user_id == $user->id;
         return $user->isAuthorOf($reply) || $user->ifAuthorOf($reply->topic);
-        return true;
     }
 
     public function destroy(User $user, Reply $reply)
     {
-        return true;
+        return $user->isAuthorOf($reply) || $user->isAuthorOf($reply->topic);
     }
 }
