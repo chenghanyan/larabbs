@@ -33,7 +33,6 @@ class UsersTableSeeder extends Seeder
 			//从头像数组中随机取出一个并赋值
 			$user->avatar = $faker->randomElement($avatars);
 		});
-
         //让隐藏字段可见，并将数据集合转换为数组
         $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();
         //插入到数据库中
@@ -41,7 +40,7 @@ class UsersTableSeeder extends Seeder
         //单独处理第一个用户的数据
         $user = User::find(1);
         $user->name = 'Summer';
-        $user->email = 'summer@549176227@qq.com';
+        $user->email = '549176227@qq.com';
         $user->avatar = 'https://fsdhubcdn.phphub.org/uploads/images/201710/14/1/ZqM7iaP4CR.png?imageView2/1/w/200/h/200';
         $user->save();
         //初始化用户角色，将1号用户指派为站长
