@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Schema;
 use App\Observers\UserObserver;
 use App\Observers\TopicObserver;
 use App\Observers\ReplyObserver;
+use App\Observers\LinkObserver;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Reply;
+use App\Models\Link;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         Topic::observe(TopicObserver::class);
         Reply::observe(ReplyObserver::class);
+        Link::observe(LinkObserver::class);
     }
 
     /**
