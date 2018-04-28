@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);//设置mysql版本低的
         \Carbon\Carbon::setLocale('zh');
         //为User模型注册观察者
-        User::observe(UserObserver::class);
+         \App\Models\User::observe(\App\Observers\UserObserver::class);
         Topic::observe(TopicObserver::class);
         Reply::observe(ReplyObserver::class);
         Link::observe(LinkObserver::class);
