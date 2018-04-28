@@ -72,9 +72,9 @@ trait ActiveUserHelper
 		// 从话题数据表里取出限定时间范围（$pass_days）内，有发表过话题的用户
         // 并且同时取出用户此段时间内发布话题的数量
         $topic_users = Topic::query()->select(DB::raw('user_id, count(*) as topic_count'))
-                                     ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
-                                     ->groupBy('user_id')
-                                     ->get();
+                                    ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
+                                    ->groupBy('user_id')
+                                    ->get();
         // 根据话题数量计算得分
         foreach ($topic_users as $value) {
             $this->users[$value->user_id]['score'] = $value->topic_count * $this->topic_weight;

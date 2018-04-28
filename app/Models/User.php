@@ -8,7 +8,8 @@ use Auth;
 use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
-    use Traits\ActiveUserHelper;
+    use Traits\ActiveUserHelper;//活跃用户
+    use Traits\LastActivedAtHelper;//用户最后登录时间
     use HasRoles;
     use Notifiable {
         notify as protected laravelNotify;
