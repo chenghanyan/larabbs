@@ -8,7 +8,6 @@ class Model extends EloquentModel
 {
     public function scopeRecent($query)
     {
-    	dd(33);
         return $query->orderBy('id', 'desc');
     }
 
